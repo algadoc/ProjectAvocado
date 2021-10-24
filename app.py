@@ -17,29 +17,22 @@ def predict():
     '''
     For rendering results on HTML GUI
     '''
-    features = [x for x in request.form.values()]
-    print(features)
-    integer_features = np.array([int(x) for x in features[:-2]])
-    print([features[-2:]])
-    onehots = encoder.transform(np.array(features[-2:]).reshape(-1,2)).toarray()
-    print(onehots)
-    print(onehots.shape)
-    final_features = np.append(integer_features, onehots).reshape(-1,1)
-    prediction = model.predict(final_features)
-    output = round(prediction[0], 2)
+    try:
+        features = [x for x in request.form.values()]
+        print(features)
+        integer_features = np.array([int(x) for x in features[:-2]])
+        print([features[-2:]])
+        onehots = encoder.transform(np.array(features[-2:]).reshape(-1,2)).toarray()
+        print(onehots)
+        print(onehots.shape)
+        final_features = np.append(integer_features, onehots).reshape(-1,1)
+        prediction = model.predict(final_features)
+        output = round(prediction[0], 2)
+    except:
+        return render_template('index.html', prediction_text='Sorry, one of your inputs caused an error', prediction_value='')
 
-    return render_template('index.html', prediction_text='Employee Salary should be $ {}'.format(output))
-
-@app.route('/predict_api',methods=['POST'])
-def predict_api():
-    '''
-    For direct API calls trought request
-    '''
-    data = request.get_json(force=True)
-    prediction = model.predict([np.array(list(data.values()))])
-
-    output = prediction[0]
-    return jsonify(output)
+    else:
+        return render_template('index.html', prediction_text='The average retail price for a single avocado will be:', prediction_value='${}'.format(output))
 
 if __name__ == "__main__":
     app.run(debug=True)

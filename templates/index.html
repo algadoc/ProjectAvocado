@@ -1,39 +1,58 @@
 <!DOCTYPE html>
 <html >
-<!--From https://codepen.io/frytyler/pen/EGdtg-->
 <head>
   <meta charset="UTF-8">
   <title>ML API</title>
-  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Hind:300" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet" type="text/css">
-<!--- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> 
---->
-  
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> 
+
 </head>
 
 <body>
- <div class="login">
-	<h1>Avocado average market price prediction</h1>
+ <div id="App">
+     <div id="header">
+        <img id="logo" src="{{ url_for('static', filename='avocado.png') }}" />
+        <h1 id="headertext">PROJECT AVOCADO</h1>
+     </div> 
 
      <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for("predict")}}"method="post">  
-    <input type="number" name="volume" placeholder="Number of avocados" required="required" />  
-    <input type="number" name="4046" placeholder="Number of small (4046) avocados" required="required" />  
-    <input type="number" name="4225" placeholder="Number of medium (4225) avocados" required="required" />  
-    <input type="number" name="4770" placeholder="Number of large (4770) avocados" required="required" />  
-    <input type="number" name="bags" placeholder="Number of bags the avocados are grouped into" required="required" />  
-    <input type="number" name="year" placeholder="Year" required="required" />
-      
+    <form id="dataform" action="{{ url_for("predict")}}"method="post">  
+    <h2 >Per-unit Avocado Retail Price Calculator</h1>
+    <span>
+    <p>How many avocados are you selling?</p>
+    <input type="number" name="volume" placeholder="Example: 100" required="required" />  
+    </span>
+    <span>
+    <p>How many small avocados are you selling?</p>
+    <input type="number" name="4046" placeholder="Example: 60" required="required" /> 
+    </span>
+    <span> 
+    <p>How many medium avocados are you selling?</p>
+    <input type="number" name="4225" placeholder="Example: 30" required="required" />  
+    </span>
+    <span>
+    <p>How many large avocados are you selling?</p>
+    <input type="number" name="4770" placeholder="Example: 10" required="required" />  
+    </span>
+    <span>
+    <p>How many bags of avocados are you selling?</p>
+    <input type="number" name="bags" placeholder="Example: 25" required="required" />  
+    </span>
+    <span>
+    <p>What year are you selling your avocados in?</p>
+    <input type="number" name="year" placeholder="Example: 2021" required="required" />
+    </span>
+    <span>
     <p>Please select your type of avocado:</p>
     <input type="radio" id="type_organic" name="type" value="organic">
     <label for="type_organic">Organic</label><br>
     <input type="radio" id="type_conventional" name="type" value="conventional">
     <label for="type_conventional">Conventional</label><br>
-  <p>Please select the region you are selling/buying your avocados</p>
-      <input list="browsers" name="browser">
-    <datalist id="browsers">
+    </span>
+    <span>
+    <p>Please select the region you are selling your avocados in: </p>
+    <input list="region" name="region" placeholder="Tip: Only use regions that are listed!">
+    <datalist id="region">
       <option value= "Albany">
       <option value= "Atlanta">
       <option value= "BaltimoreWashington">
@@ -88,14 +107,16 @@
       <option value= "West">
       <option value= "WestTexNewMexico">
     </datalist>
-
-        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </span>
+    <button id="submitbutton" type="submit">Calculate!</button>
     </form>
 
    <br>
    <br>
-   {{ prediction_text }}
-
+   <div id="prediction">
+      <span id="alwayspred">{{ prediction_text }}</span>
+      <span id="valuepred">{{prediction_value}}</span>
+    </div>
  </div>
 
 
