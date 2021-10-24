@@ -4,11 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <title>ML API</title>
-  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Hind:300" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet" type="text/css">
+<!--- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> 
+--->
   
 </head>
 
@@ -17,16 +18,76 @@
 	<h1>Avocado average market price prediction</h1>
 
      <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict')}}"method="post">    
-    <p>Date:</p>
-    	<input type="date" name="date" placeholder="Date" required="required" />
-      <input type="number" name="volume" placeholder="Number of avocados" required="required" />
+    <form action="{{ url_for("predict")}}"method="post">  
+    <input type="number" name="volume" placeholder="Number of avocados" required="required" />  
+    <input type="number" name="4046" placeholder="Number of small (4046) avocados" required="required" />  
+    <input type="number" name="4225" placeholder="Number of medium (4225) avocados" required="required" />  
+    <input type="number" name="4770" placeholder="Number of large (4770) avocados" required="required" />  
+    <input type="number" name="bags" placeholder="Number of bags the avocados are grouped into" required="required" />  
+    <input type="number" name="year" placeholder="Year" required="required" />
+      
     <p>Please select your type of avocado:</p>
-    <input type="radio" id="type_organic" name="type" value="Organic">
+    <input type="radio" id="type_organic" name="type" value="organic">
     <label for="type_organic">Organic</label><br>
-    <input type="radio" id="type_conventional" name="type" value="Conventional">
+    <input type="radio" id="type_conventional" name="type" value="conventional">
     <label for="type_conventional">Conventional</label><br>
-
+  <p>Please select the region you are selling/buying your avocados</p>
+      <input list="browsers" name="browser">
+    <datalist id="browsers">
+      <option value= "Albany">
+      <option value= "Atlanta">
+      <option value= "BaltimoreWashington">
+      <option value= "Boise">
+      <option value= "Boston">
+      <option value="BuffaloRochester">
+      <option value= "California">
+      <option value= "Charlotte">
+      <option value= "Chicago">
+      <option value="CincinnatiDayton">
+      <option value= "Columbus">
+      <option value= "DallasFtWorth">
+      <option value= "Denver">
+      <option value="Detroit">
+      <option value= "GrandRapids">
+      <option value= "GreatLakes">
+      <option value= "HarrisburgScranton">
+      <option value="HartfordSpringfield">
+      <option value= "Houston">
+      <option value= "Indianapolis">
+      <option value= "Jacksonville">
+      <option value="LasVegas">
+      <option value= "LosAngeles">
+      <option value= "Louisville">
+      <option value= "MiamiFtLauderdale">
+      <option value="Midsouth">
+      <option value= "Nashville">
+      <option value= "NewOrleansMobile">
+      <option value= "NewYork">
+      <option value="Northeast">
+      <option value= "NorthernNewEngland">
+      <option value= "Orlando">
+      <option value= "Philadelphia">
+      <option value="PhoenixTucson">
+      <option value= "Pittsburgh">
+      <option value= "Plains">
+      <option value= "Portland">
+      <option value="RaleighGreensboro">
+      <option value= "RichmondNorfolk">
+      <option value= "Roanoke">
+      <option value= "Sacramento">
+      <option value="SanDiego">
+      <option value= "SanFrancisco">
+      <option value= "Seattle">
+      <option value= "SouthCarolina">
+      <option value="SouthCentral">
+      <option value= "Southeast">
+      <option value= "Spokane">
+      <option value= "StLouis">
+      <option value= "Syracuse">
+      <option value="Tampa">
+      <option value= "West">
+      <option value= "WestTexNewMexico">
+    </datalist>
 
         <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
     </form>
